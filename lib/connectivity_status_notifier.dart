@@ -22,12 +22,17 @@ class ConnectivityStatusNotifier extends StateNotifier<ConnectivityStatus> {
     Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
       switch (result) {
         case ConnectivityResult.mobile:
+        case ConnectivityResult.bluetooth:
+        case ConnectivityResult.ethernet:
+        case ConnectivityResult.vpn:
+        case ConnectivityResult.other:
         case ConnectivityResult.wifi:
           newState = ConnectivityStatus.isConnected;
           break;
         case ConnectivityResult.none:
           newState = ConnectivityStatus.isDisonnected;
           break;
+        
       }
       if (newState != lastResult) {
         state = newState!;
